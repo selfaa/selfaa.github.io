@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        websocket - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>John Doe</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket是什么？"><span class="toc-text">websocket是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket与http的区别"><span class="toc-text">websocket与http的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远古时期的解决方案"><span class="toc-text">远古时期的解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket的应用场景"><span class="toc-text">websocket的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket的原理"><span class="toc-text">websocket的原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket的心跳包"><span class="toc-text">websocket的心跳包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#websocket的实现"><span class="toc-text">websocket的实现</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        websocket
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-02-22 20:38:08</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="websocket是什么？"><a href="#websocket是什么？" class="headerlink" title="websocket是什么？"></a>websocket是什么？</h3><p>webSocket是一种在单个TCP连接上进行全双工通信的协议 </p>
+<p>webSocket使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端推送数据。在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输 </p>
+<h3 id="websocket与http的区别"><a href="#websocket与http的区别" class="headerlink" title="websocket与http的区别"></a>websocket与http的区别</h3><ul>
+<li>http请求建立连接只能发送一次请求,不能有服务器端主动向客户端发送请求</li>
+<li>websocket建立的长连接，一次连接，后续一直通信，这样节省资源，可以有客户端发送请求给服务器端</li>
+</ul>
+<h3 id="远古时期的解决方案"><a href="#远古时期的解决方案" class="headerlink" title="远古时期的解决方案"></a>远古时期的解决方案</h3><p>现在，很多网站为了实现推送技术，所用的技术都是轮询。轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP请求，然后由服务器返回最新的数据给客户端的浏览器。这种传统的模式带来很明显的缺点，即浏览器需要不断的向服务器发出请求，然而HTTP请求可能包含较长的头部，其中真正有效的数据可能只是很小的一部分，显然这样会浪费很多的带宽等资源。<br>而比较新的技术去做轮询的效果是Comet。这种技术虽然可以双向通信，但依然需要反复发出请求。而且在Comet中，普遍采用的长链接，也会消耗服务器资源。</p>
+<p>在这种情况下，HTML5定义了WebSocket协议，能更好的节省服务器资源和带宽，并且能够更实时地进行通讯</p>
+<p>轮询是几个意思？</p>
+<p>轮询是最原始的实现实时Web应用的解决方案。轮询技术要求客户端以设定的时间间隔周期性地向服务端发送请求，频繁地查询是否有新的数据改动。明显地，这种方法会导致过多不必要的请求，浪费流量和服务器资源。总之就是一种low到爆炸的原始作坊水平的技术。</p>
+<h3 id="websocket的应用场景"><a href="#websocket的应用场景" class="headerlink" title="websocket的应用场景"></a>websocket的应用场景</h3><ul>
+<li><strong>聊天软件：</strong>最著名的就是微信，QQ，这一类社交聊天的app</li>
+<li><strong>弹幕：</strong>各种直播的弹幕窗口</li>
+<li><strong>在线教育：</strong>可以视频聊天、即时聊天以及其与别人合作一起在网上讨论问题…</li>
+</ul>
+<h3 id="websocket的原理"><a href="#websocket的原理" class="headerlink" title="websocket的原理"></a>websocket的原理</h3><ul>
+<li>websocket首先借助http协议（通过在http头部设置属性，请求和服务器进行协议升级，升级协议为websocket的应用层协议）</li>
+<li>建立好和服务器之间的数据流，数据流之间底层还是依靠TCP协议；</li>
+<li>websocket会接着使用这条建立好的数据流和服务器之间保持通信；</li>
+<li>由于复杂的网络环境，数据流可能会断开，在实际使用过程中，我们在onFailure或者onClosing回调方法中，实现重连</li>
+</ul>
+<h3 id="websocket的心跳包"><a href="#websocket的心跳包" class="headerlink" title="websocket的心跳包"></a>websocket的心跳包</h3><h3 id="websocket的实现"><a href="#websocket的实现" class="headerlink" title="websocket的实现"></a>websocket的实现</h3><p>本文通过基于dwebsocket库来将socket嵌入到django服务中，使其服务兼具http协议和socket协议，能够达到实时前后端通信，后端主动推送等功能</p>
+<p>安装dwebsocket库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple dwebsocket</span><br></pre></td></tr></table></figure>
+
+<p>定义视图文件的逻辑views.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入websocket装饰器</span></span><br><span class="line"><span class="keyword">from</span> dwebsocket.decorators <span class="keyword">import</span> accept_websocket</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#接收前端信息</span></span><br><span class="line"><span class="meta">@accept_websocket</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_socket</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.is_websocket():</span><br><span class="line">        <span class="keyword">for</span> message <span class="keyword">in</span> request.websocket:</span><br><span class="line">            c=str(message,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">            print(c)</span><br><span class="line">            request.websocket.send(message)</span><br><span class="line"></span><br><span class="line"><span class="comment">#主动推送消息</span></span><br><span class="line"><span class="meta">@accept_websocket</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_websocket</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.is_websocket():</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            time.sleep(<span class="number">1</span>) <span class="comment">## 向前端发送时间</span></span><br><span class="line">            dit = &#123;</span><br><span class="line">                <span class="string">'time'</span>:time.strftime(<span class="string">'%Y.%m.%d %H:%M:%S'</span>,time.localtime(time.time()))</span><br><span class="line">            &#125;</span><br><span class="line">            request.websocket.send(json.dumps(dit))</span><br></pre></td></tr></table></figure>
+
+<p>路由配置urls.py</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">#websocket</span></span><br><span class="line"><span class="xml">path('socket_test',TemplateView.as_view(template_name='md_admin/socket.html')),</span></span><br><span class="line"><span class="xml">path('websocket_test',TemplateView.as_view(template_name='md_admin/socket_push.html')),</span></span><br><span class="line"><span class="xml">path('test_socket',test_socket),</span></span><br><span class="line"><span class="xml">path('test_websocket',test_websocket),</span></span><br></pre></td></tr></table></figure>
+
+<p>定义前端发送消息的页面 socket.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Chat Room<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"chat-message-input"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">size</span>=<span class="string">"100"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"chat-message-submit"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Send"</span> <span class="attr">onclick</span>=<span class="string">'sendmessage()'</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="actionscript">   <span class="comment">//生成socket对象</span></span></span><br><span class="line"><span class="javascript">   <span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws:"</span> + <span class="built_in">window</span>.location.host + <span class="string">"/md_admin/test_socket"</span>);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript">            socket.onopen = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'WebSocket open'</span>);<span class="comment">//成功连接上Websocket</span></span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="actionscript">            socket.onmessage = <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'message: '</span> + e.data);<span class="comment">//打印服务端返回的数据</span></span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="actionscript">            socket.onclose=<span class="function"><span class="keyword">function</span><span class="params">(e)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">              <span class="built_in">console</span>.log(e);</span></span><br><span class="line"><span class="actionscript">              socket.close(); <span class="comment">//关闭TCP连接</span></span></span><br><span class="line">            &#125;;</span><br><span class="line">            if (socket.readyState == WebSocket.OPEN)&#123;</span><br><span class="line">            socket.onopen();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="built_in">window</span>.s = socket;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">sendmessage</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.s.send(<span class="built_in">document</span>.getElementById(<span class="string">"chat-message-input"</span>).value);</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后再定义一个页面，测试后台的主动推送socket_push.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Chat Room<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="actionscript">   <span class="comment">//生成socket对象</span></span></span><br><span class="line"><span class="javascript">   <span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws:"</span> + <span class="built_in">window</span>.location.host + <span class="string">"/md_admin/test_websocket"</span>);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript">            socket.onopen = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'WebSocket open'</span>);<span class="comment">//成功连接上Websocket</span></span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="actionscript">            socket.onmessage = <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'message: '</span> + e.data);<span class="comment">//打印服务端返回的数据</span></span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="actionscript">            socket.onclose=<span class="function"><span class="keyword">function</span><span class="params">(e)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">              <span class="built_in">console</span>.log(e);</span></span><br><span class="line"><span class="actionscript">              socket.close(); <span class="comment">//关闭TCP连接</span></span></span><br><span class="line">            &#125;;</span><br><span class="line">            if (socket.readyState == WebSocket.OPEN)&#123;</span><br><span class="line">            socket.onopen();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，前后端无论是前端发送消息，还是后端主动推送消息，全部基于websocket，实现了真正意义上的实时通信</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

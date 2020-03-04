@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        docker - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>John Doe</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Docker简介"><span class="toc-text">一、Docker简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、docker的组成"><span class="toc-text">二、docker的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、docker与虚拟机比较"><span class="toc-text">三、docker与虚拟机比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、docker技术应用场景"><span class="toc-text">四、docker技术应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、场景一：节省项目环境部署时间"><span class="toc-text">1、场景一：节省项目环境部署时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、场景二：环境一致性"><span class="toc-text">2、场景二：环境一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、场景三：持续集成"><span class="toc-text">3、场景三：持续集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、场景四：微服务"><span class="toc-text">4、场景四：微服务</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        docker
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-03-02 14:11:28</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#docker" title="docker">docker</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="一、Docker简介"><a href="#一、Docker简介" class="headerlink" title="一、Docker简介"></a>一、Docker简介</h2><ol>
+<li><p>Docker 是应用最广泛的开源容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中 </p>
+</li>
+<li><p>然后发布到任何流行的 Linux或Windows 机器上，也可以实现虚拟化。 </p>
+</li>
+<li><p>每个容器拥有一套和宿主机完全隔离的文件系统（共用linux内核），程序在这个虚拟容器里运行，就好像在真实的物理机上运行一样。 </p>
+<p>容器：</p>
+<p><strong>1）</strong>容器是一个操作系统级别下的虚拟化技术，运行一个容器就行运行一个进程一样</p>
+<p><strong>2）</strong>容器依赖linux内核特性：Namespace（资源隔离）和Cgroups（资源限制）</p>
+</li>
+</ol>
+<p><strong>总结</strong></p>
+<ul>
+<li>一个简单的应用程序打包工具</li>
+<li>使用最广泛的开源容器</li>
+<li>一种操作系统级的虚拟化技术</li>
+<li>依赖于Linux内核特性：Namespace（资源隔离） 和 Cgroups（资源限制）</li>
+</ul>
+<hr>
+<h2 id="二、docker的组成"><a href="#二、docker的组成" class="headerlink" title="二、docker的组成"></a>二、docker的组成</h2><p><strong></strong> </p>
+<table>
+<thead>
+<tr>
+<th>DockerClient</th>
+<th>客户端</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Docker Daemon</td>
+<td>守护进程</td>
+</tr>
+<tr>
+<td>Docker Images</td>
+<td>镜像</td>
+</tr>
+<tr>
+<td>Docker Container</td>
+<td>容器</td>
+</tr>
+<tr>
+<td>Docker Registry</td>
+<td>镜像仓库</td>
+</tr>
+</tbody></table>
+<h2 id="三、docker与虚拟机比较"><a href="#三、docker与虚拟机比较" class="headerlink" title="三、docker与虚拟机比较"></a>三、docker与虚拟机比较</h2><p><strong></strong> </p>
+<p><strong></strong> </p>
+<h2 id="四、docker技术应用场景"><a href="#四、docker技术应用场景" class="headerlink" title="四、docker技术应用场景"></a>四、docker技术应用场景</h2><h3 id="1、场景一：节省项目环境部署时间"><a href="#1、场景一：节省项目环境部署时间" class="headerlink" title="1、场景一：节省项目环境部署时间"></a><strong>1、场景一：节省项目环境部署时间</strong></h3><p>　　　<strong>1）单项目打包</strong></p>
+<p>　　　　　　1. 每次部署项目到测试、生产等环境，都要部署一大堆依赖的软件、工具，时间久，出错概率大。</p>
+<p>　　　　　　2. Docker主要理念就是环境打包部署，可在任意Docker Engine运行。</p>
+<p>　　　　　　3. 我们只需要将每个项目环境打包到镜像，push到镜像仓库，当有需要部署这个项目时，直接pull镜像启动容器，这个项目就可以访问了！一次构建多次部署，一劳永逸。</p>
+<p>　　　 <strong>2）整套项目打包</strong></p>
+<p>　　　　　　1. 比如有一个产品可以整套部署到客户那里，以往都是派一名实施工程师到客户那部署。</p>
+<p>　　　　　　2. 如果用了Docker，我们可以前期将这套项目封装打包起来，实现一键部署，分分钟钟搞定，就不需要再派人过去了。比如官方的Docker Compose编排工具。</p>
+<p>　　　 <strong>3）新开源技术试用</strong></p>
+<p>　　　　　　1. 有时，我们想调研一些开源项目，我们可以直接从公共镜像仓库pull项目官方做好镜像启动容器即可。</p>
+<h3 id="2、场景二：环境一致性"><a href="#2、场景二：环境一致性" class="headerlink" title="2、场景二：环境一致性"></a><strong>2、场景二：环境一致性</strong></h3><p>　　　　　　1. 项目在开发电脑本地运行没问题，到了测试或生产环境就运行不起来。</p>
+<p>　　　　　　2. Docker将项目环境打包成镜像，可以在任何Docker Engine部署。</p>
+<h3 id="3、场景三：持续集成"><a href="#3、场景三：持续集成" class="headerlink" title="3、场景三：持续集成"></a><strong>3、场景三：持续集成</strong></h3><p>　　　　　　1. 一个项目版本快速迭代的测试场景，需要一个合理的CI（持续集成）/CD（持续部署）环境支撑。</p>
+<p>　　　　　　2. CI/CD是一个周期性自动化项目测试流程，包括构建、部署、测试、发布等工作，很少需要人工干预。</p>
+<p>　　　　　　3. Docker通过项目镜像构建和快速部署，打通测试环境与生产环境，高度保持多个环境之间一致性。</p>
+<h3 id="4、场景四：微服务"><a href="#4、场景四：微服务" class="headerlink" title="4、场景四：微服务"></a><strong>4、场景四：微服务</strong></h3><p>　　　　　　1. 微服务指尽可能细粒度拆分业务程序架构，由多个独立服务组成业务系统。</p>
+<p>　　　　　　2. Docker容器作为这些独立服务的部署单元，每个服务单独部署到一个docker容器中。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = ""
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
