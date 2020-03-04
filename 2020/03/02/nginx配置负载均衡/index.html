@@ -1,48 +1,370 @@
-extends partial/layout
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    div#post-container
-        include mixins/post
-        +post(page)
-        include partial/comment
-
-    //- Comment
-    if theme.duoshuo
-        script.
-            var duoshuoQuery = {short_name:"#{theme.duoshuo}"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0] 
-                || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
 
 
-    if theme.disqus
-        script.
-            var disqus_shortname = '#{theme.disqus}';
-            var disqus_identifier = '#{page.path}';
-            var disqus_title = '#{page.title}';
-            var disqus_url = '#{config.url}/#{page.path}';
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        script(id='dsq-count-scr' src='//#{theme.disqus}.disqus.com/count.js' async)
 
-block pagination
-    include mixins/paginator
-    +post()
 
-block copyright
-    include partial/copyright
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="John Doe">
+  
+  
+  
+  
+    <meta name="description" content="1、搭载实验环境（使用docker部署两台nginx容器）12345#使用docker搭建第一台nginx服务[root@node1 ~]# docker container run -d --name web01 -p 81:80 nginx测试访问：http://192.168.26.128.81/[root@node1 ~]# docker exec -it web01 bashroo...">
+  
+  <title>nginx配置负载均衡 [ SiFei ]</title>
+  
+  
+    <link rel="shortcut icon" href="/hollow.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2020/03/02/docker/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        docker
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2020/03/02/nginx%E6%98%AF%E4%BB%80%E4%B9%88/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        nginx是什么?
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg"/>
+          <div id="homelink">SiFei</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/">首页</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">文章</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/tags">标签</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/categories">分类</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">关于</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  
+
+  <article id="post">
+    <h1>nginx配置负载均衡</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">Created at 2020-03-02</span>
+      
+        <span id = "post-title-updated">Updated at 2020-03-03</span>
+      
+      
+      <span id = "post-title-categories">Category
+      
+      
+        
+        
+        <a href="/categories/Linux/">Linux</a>
+      
+      </span>
+      
+      
+      <span id = "post-title-tags">
+      Tag
+      
+      
+        
+        
+        <a href="/tags/nginx/">nginx</a>
+      
+      </span>
+      
+    </p>
+    
+    <h2 id="1、搭载实验环境（使用docker部署两台nginx容器）"><a href="#1、搭载实验环境（使用docker部署两台nginx容器）" class="headerlink" title="1、搭载实验环境（使用docker部署两台nginx容器）"></a>1、搭载实验环境（使用docker部署两台nginx容器）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用docker搭建第一台nginx服务</span></span><br><span class="line">[root@node1 ~]<span class="comment"># docker container run -d --name web01 -p 81:80 nginx</span></span><br><span class="line">测试访问：http://<span class="number">192.168</span><span class="number">.26</span><span class="number">.128</span><span class="number">.81</span>/</span><br><span class="line">[root@node1 ~]<span class="comment"># docker exec -it web01 bash</span></span><br><span class="line">root@b68021de00b8:/<span class="comment"># echo web01 &gt; /usr/share/nginx/html/index.html</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用docker搭建第二台nginx服务</span></span><br><span class="line">[root@node1 ~]<span class="comment"># docker container run -d --name web02 -p 82:80 nginx</span></span><br><span class="line">测试访问：http://<span class="number">192.168</span><span class="number">.26</span><span class="number">.128</span><span class="number">.82</span>/</span><br><span class="line">[root@node1 ~]<span class="comment"># docker exec -it web02 bash</span></span><br><span class="line">root@ba1678e54a53:/<span class="comment"># echo web02 &gt; /usr/share/nginx/html/index.html</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2、在真实主机中安装nginx并配置负载均衡"><a href="#2、在真实主机中安装nginx并配置负载均衡" class="headerlink" title="2、在真实主机中安装nginx并配置负载均衡"></a>2、<strong>在真实主机中安装nginx并配置负载均衡</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]<span class="comment"># yum -y install nginx</span></span><br><span class="line">[root@node1 ~]<span class="comment"># vim /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="comment">#### 修改nginx.conf 默认是轮训 ####</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"># 1. upstream是自己写的，一定要放在server外面</span></span><br><span class="line"><span class="string">upstream myservers &#123;</span></span><br><span class="line"><span class="string">    server 192.168.56.14:81;</span></span><br><span class="line"><span class="string">    server 192.168.56.14:82;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 2. server其实默认已经有一个，只需要修改location中配置，指定转发代理即可</span></span><br><span class="line"><span class="string">server &#123;</span></span><br><span class="line"><span class="string">    location / &#123;</span></span><br><span class="line"><span class="string">       proxy_pass http://myservers;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">[root@node1 nginx]<span class="comment"># systemctl reload nginx				#重载nginx</span></span><br><span class="line">[root@node1 nginx]<span class="comment"># systemctl start nginx				#启动nginx</span></span><br><span class="line">[root@node1 nginx]<span class="comment"># systemctl restart nginx 				#重启nginx</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3、负载均衡常用配置梳理"><a href="#3、负载均衡常用配置梳理" class="headerlink" title="3、负载均衡常用配置梳理"></a>3、负载均衡常用配置梳理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、轮询（默认）</span><br><span class="line">每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</span><br><span class="line"></span><br><span class="line">upstream backserver &#123;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.14</span>;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.15</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、权重 weight</span><br><span class="line">指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</span><br><span class="line"></span><br><span class="line">upstream backserver &#123;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.14</span> weight=<span class="number">3</span>;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.15</span> weight=<span class="number">7</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、ip_hash（ IP绑定）</span><br><span class="line">上述方式存在一个问题就是说，在负载均衡系统中，假如用户在某台服务器上登录了，那么该用户第二次请求的时候，因为我们是负载均衡系统，</span><br><span class="line">每次请求都会重新定位到服务器集群中的某一个，那么已经登录某一个服务器的用户再重新定位到另一个服务器，其登录信息将会丢失，这样显然是不妥的。</span><br><span class="line">我们可以采用ip_hash指令解决这个问题，如果客户已经访问了某个服务器，当用户再次访问时，会将该请求通过哈希算法，自动定位到该服务器。</span><br><span class="line">每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</span><br><span class="line"></span><br><span class="line">upstream backserver &#123;</span><br><span class="line">    ip_hash;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.14</span>:<span class="number">88</span>;</span><br><span class="line">    server <span class="number">192.168</span><span class="number">.0</span><span class="number">.15</span>:<span class="number">80</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、fair（第三方插件）</span><br><span class="line">按后端服务器的响应时间来分配请求，响应时间短的优先分配。</span><br><span class="line"></span><br><span class="line">upstream backserver &#123;</span><br><span class="line">    server server1;</span><br><span class="line">    server server2;</span><br><span class="line">    fair;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、url_hash（第三方插件）</span><br><span class="line">按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</span><br><span class="line"></span><br><span class="line">upstream backserver &#123;</span><br><span class="line">    server squid1:<span class="number">3128</span>;</span><br><span class="line">    server squid2:<span class="number">3128</span>;</span><br><span class="line">    hash $request_uri;</span><br><span class="line">    hash_method crc32;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
+  <div class="random-toc">
+    <h2>Table of Content</h2>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、搭载实验环境（使用docker部署两台nginx容器）"><span class="toc-text">1、搭载实验环境（使用docker部署两台nginx容器）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、在真实主机中安装nginx并配置负载均衡"><span class="toc-text">2、在真实主机中安装nginx并配置负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、负载均衡常用配置梳理"><span class="toc-text">3、负载均衡常用配置梳理</span></a></li></ol>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2020/03/02/docker/" class="prev">&larr; Prev post docker</a>
+  
+
+  
+
+  
+    <a href="/2020/03/02/nginx%E6%98%AF%E4%BB%80%E4%B9%88/" class="next">Next post nginx是什么? &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by John Doe using
+      <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random" target="_blank" rel="noopener">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="http://7te9fe.com1.z0.glb.clouddn.com/default_avatar.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/stiekel" target="_blank" rel="noopener">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://coding.net/u/Stiekel" target="_blank" rel="noopener">
+        
+          <i class="icon iconfont coding">&#xe607;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/SidCN" target="_blank" rel="noopener">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://weibo.com/sidcn" target="_blank" rel="noopener">
+        
+          <i class="icon iconfont weibo">&#xe602;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="http://www.douban.com/people/Stiekel/" target="_blank" rel="noopener">
+        
+          <i class="icon iconfont douban">&#xe60f;</i>
+        
+      </a>
+    </li>
+  
+</ul>
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2","flash"],"timer":true,"delay":1500000,"shuffle":true,"count":12};
+var unsplashConfig = {"gravity":"center"};
+// is show background images
+var turnoffBackgroundImage = false;
+
+
+
+
+var backgroundColor = "34495E";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+
